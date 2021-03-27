@@ -1,0 +1,2 @@
+This is starting. Continued writing. Stopped using fprintf.
+Tring to make it better like that.as

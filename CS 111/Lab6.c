@@ -85,7 +85,7 @@ void pal(int n){
     for (int i = 0; x>0; x=x/10)
     {
         /* code */
-        rev=rev*10+(x%10);
+        rev=rev*10+(x%10);//to understand this check for anumber. there's no other way
     }
     
     if (n==rev)
