@@ -1,4 +1,4 @@
-### Assignment-I
+### Assignment-II
 - National Institute of Technology Silchar, 
 - Data Structures, 
 - Course Code: CS 201
