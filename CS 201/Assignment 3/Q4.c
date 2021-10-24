@@ -1,18 +1,15 @@
-
 #include <stdlib.h>
 #include <time.h>
 
 //a
-void InsertItemAtLast(int A[], int n, int key)
-{
-    A = (int *)realloc(A, n + 1);
+void InsertItemAtLast(int A[], int n, int key) {
+    A = (int *) realloc(A, n + 1);
     A[n] = key;
 }
 
 //b
-void InsertItemAtFirst(int A[], int n, int key)
-{
-    A = (int *)realloc(A, n + 1);
+void InsertItemAtFirst(int A[], int n, int key) {
+    A = (int *) realloc(A, n + 1);
 
     for (int i = n; i > 0; i--)
         A[i] = A[i - 1];
@@ -20,9 +17,8 @@ void InsertItemAtFirst(int A[], int n, int key)
 }
 
 //c
-void InsertItemAtIndex(int A[], int n, int i, int key)
-{
-    A = (int *)realloc(A, n + 1);
+void InsertItemAtIndex(int A[], int n, int i, int key) {
+    A = (int *) realloc(A, n + 1);
 
     for (int j = n; j > i; j--)
         A[j] = A[j - 1];
@@ -30,34 +26,29 @@ void InsertItemAtIndex(int A[], int n, int i, int key)
 }
 
 //d
-void DeleteItemFromLast(int A[], int n)
-{
-    A = (int *)realloc(A, n - 1);
+void DeleteItemFromLast(int A[], int n) {
+    A = (int *) realloc(A, n - 1);
 }
 
 //e
-void DeleteItemFromFirst(int A[], int n)
-{
+void DeleteItemFromFirst(int A[], int n) {
 
     for (int i = 0; i < n - 1; i++)
         A[i] = A[i + 1];
 
-    A = (int *)realloc(A, n - 1);
+    A = (int *) realloc(A, n - 1);
 }
 
 //f
-void DeleteItemFromIndex(int A[], int n, int i)
-{
+void DeleteItemFromIndex(int A[], int n, int i) {
     for (int j = i; j < n - 1; j++)
         A[j] = A[j + 1];
-    A = (int *)realloc(A, n - 1);
+    A = (int *) realloc(A, n - 1);
 }
 
 //g
-int FindItemUnsorted(int A[], int n, int key)
-{
-    for (int i = 0; i < n; i++)
-    {
+int FindItemUnsorted(int A[], int n, int key) {
+    for (int i = 0; i < n; i++) {
         if (A[i] == key)
             return i;
     }
@@ -65,8 +56,7 @@ int FindItemUnsorted(int A[], int n, int key)
 }
 
 //h
-int binarySearch(int A[], int n, int key, int low, int high)
-{
+int binarySearch(int A[], int n, int key, int low, int high) {
     int mid = (low + high) / 2;
 
     if (low > high)
@@ -79,22 +69,18 @@ int binarySearch(int A[], int n, int key, int low, int high)
         return binarySearch(A, n, key, mid + 1, n - 1);
 }
 
-int FindItemSorted(int A[], int n, int key)
-{
+int FindItemSorted(int A[], int n, int key) {
     return binarySearch(A, n, key, 0, n - 1);
 }
 
 //i
-void SortArray(int A[], int n)
-{
+void SortArray(int A[], int n) {
     int key, j;
-    for (int i = 1; i < n; i++)
-    {
+    for (int i = 1; i < n; i++) {
         key = A[i];
         j = i - 1;
 
-        while (j >= 0 && A[j] > key)
-        {
+        while (j >= 0 && A[j] > key) {
             A[j + 1] = A[j];
             j = j - 1;
         }
@@ -103,11 +89,10 @@ void SortArray(int A[], int n)
 }
 
 //j
-int *ExtractSubest(int A[], int n, int i, int j)
-{
+int *ExtractSubest(int A[], int n, int i, int j) {
 
     int size = j - i + 1;
-    int *subset = (int *)malloc(size * sizeof(int));
+    int *subset = (int *) malloc(size * sizeof(int));
 
     for (int k = 0; k < size; k++)
         subset[k] = A[i + k];
@@ -116,18 +101,16 @@ int *ExtractSubest(int A[], int n, int i, int j)
 }
 
 //k
-void DeleteSubset(int A[], int n, int i, int j)
-{
+void DeleteSubset(int A[], int n, int i, int j) {
     int size = (n - j) + (i - 1);
 
     for (int k = j + 1; k < n; k++)
         A[(k - j) + (i - 1)] = A[k];
-    A = (int *)realloc(A, size);
+    A = (int *) realloc(A, size);
 }
 
 //l
-void SplitIntoTwoArray(int A[], int n, int *splitArray1, int *splitArray2)
-{
+void SplitIntoTwoArray(int A[], int n, int *splitArray1, int *splitArray2) {
 
     //Assuming split is from middle
     int mid = n / 2;
@@ -139,38 +122,32 @@ void SplitIntoTwoArray(int A[], int n, int *splitArray1, int *splitArray2)
 }
 
 //m
-void CloneArray(int A[], int n, int B[])
-{
+void CloneArray(int A[], int n, int B[]) {
     for (int i = 0; i < n; i++)
         B[i] = A[i];
 }
 
 //n
-void ShiftLeftArray(int A[], int n, int r)
-{
+void ShiftLeftArray(int A[], int n, int r) {
     for (int i = 0; i < n - r; i++)
         A[i] = A[i + r];
 
-    A = (int *)realloc(A, n - 1);
+    A = (int *) realloc(A, n - 1);
 }
 
 //o
-void ShiftRightArray(int A[], int n, int r)
-{
-    A = (int *)realloc(A, n - r);
+void ShiftRightArray(int A[], int n, int r) {
+    A = (int *) realloc(A, n - r);
 }
 
 //p
-void RotateArrayClockwise(int A[], int n, int r)
-{
+void RotateArrayClockwise(int A[], int n, int r) {
     int temp[r];
 
-    for (int i = 0; i < n; i++)
-    {
+    for (int i = 0; i < n; i++) {
         if (i < r)
             temp[i] = A[i]; //copying to temp
-        else
-        {
+        else {
             A[i - r] = A[i]; //shifting
 
             if (i >= n - r)
@@ -180,8 +157,7 @@ void RotateArrayClockwise(int A[], int n, int r)
 }
 
 //q
-void RotateArrayAntiClockwise(int A[], int n, int r)
-{
+void RotateArrayAntiClockwise(int A[], int n, int r) {
     int temp[r];
 
     for (int i = n - r; i < n; i++)
@@ -195,11 +171,9 @@ void RotateArrayAntiClockwise(int A[], int n, int r)
 }
 
 //r
-int FindMin(int A[], int n)
-{
+int FindMin(int A[], int n) {
     int min = 0;
-    for (int i = 0; i < n; i++)
-    {
+    for (int i = 0; i < n; i++) {
         if (A[min] > A[i])
             min = i;
     }
@@ -207,11 +181,9 @@ int FindMin(int A[], int n)
 }
 
 //s
-int FindMax(int A[], int n)
-{
+int FindMax(int A[], int n) {
     int max = 0;
-    for (int i = 0; i < n; i++)
-    {
+    for (int i = 0; i < n; i++) {
         if (A[max] < A[i])
             max = i;
     }
@@ -219,8 +191,7 @@ int FindMax(int A[], int n)
 }
 
 //t
-void FillArrayPseudoRandom(int A[], int n)
-{
+void FillArrayPseudoRandom(int A[], int n) {
 
     srand(time(0));
 
@@ -229,8 +200,7 @@ void FillArrayPseudoRandom(int A[], int n)
 }
 
 //u
-void FillArrayTrueRandom(int A[], int n)
-{
+void FillArrayTrueRandom(int A[], int n) {
 
     int mods[10] = {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000};
     srand(time(0));
@@ -240,35 +210,29 @@ void FillArrayTrueRandom(int A[], int n)
 }
 
 //v
-int *IncreaseArraySize(int A[], int n, int m)
-{
-    return (int *)realloc(A, m);
+int *IncreaseArraySize(int A[], int n, int m) {
+    return (int *) realloc(A, m);
 }
 
 //w
-void SetArrayToZero(int A[], int n)
-{
+void SetArrayToZero(int A[], int n) {
     for (int i = 0; i < n; i++)
         A[i] = 0;
 }
 
 //x
-void DeleteAllItemOfArray(int A[], int n)
-{
+void DeleteAllItemOfArray(int A[], int n) {
     for (int i = 0; i < n; i++)
         A[i] = 0;
 }
 
 //y
-void DeleteArray(int A[])
-{
+void DeleteArray(int A[]) {
     free(A);
 }
 
 //z
-int *AllocateArray(int n, int *B)
-{
-    int *A = (int *)malloc(n * sizeof(int));
+int *AllocateArray(int n, int *B) {
+    int *A = (int *) malloc(n * sizeof(int));
     return A;
 }
-
