@@ -2,7 +2,7 @@
 - National Institute of Technology Silchar, 
 - Data Structures, 
 - Course Code: CS 201
-- <a href="CS 201/Assignment 3/Assignment-III.pdf">Questions</a>
+- <a href="Assignment-III.pdf">Questions</a>
 
 ### Submitted by:
 - Anurag Pathak
