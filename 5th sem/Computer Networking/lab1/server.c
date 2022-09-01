@@ -6,7 +6,7 @@
 #include <unistd.h>
 #define PORT 8080
 
-int main(int argc, char const *argv[]) {
+int main() {
   int server_fd, new_socket, valread;
   struct sockaddr_in address;
   int opt = 1;
@@ -48,7 +48,7 @@ int main(int argc, char const *argv[]) {
   printf("Message sent from server.\n");
 
   close(new_socket);
-  
+
   shutdown(server_fd, SHUT_RDWR);
   return 0;
 }
