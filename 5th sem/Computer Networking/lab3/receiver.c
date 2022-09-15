@@ -7,6 +7,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <time.h>
+#include <unistd.h>
 
 #define W 5
 #define P1 50
@@ -17,26 +18,29 @@ char b[10];
 void alpha9(int);
 
 int main() {
-  struct sockaddr_in srv, client;
-  int s, n, sock, i, j, c = 1, f;
+  struct sockaddr_in address, client;
+  int server_fd, addr_len, new_socket, i, j, c = 1, f;
   unsigned int s1;
-  s = socket(AF_INET, SOCK_STREAM, 0);
-  srv.sin_family = AF_INET;
-  srv.sin_port = 6500;
-  srv.sin_addr.s_addr = inet_addr("127.0.0.1");
-  bind(s, (struct sockaddr *)&srv, sizeof(srv));
-  listen(s, 1);
-  n = sizeof(client);
-  sock = accept(s, (struct sockaddr *)&client, &n);
+  server_fd = socket(AF_INET, SOCK_STREAM, 0);
+  address.sin_family = AF_INET;
+  address.sin_port = 6500;
+  address.sin_addr.s_addr = inet_addr("127.0.0.1");
+  if(bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0) {
+    perror("bind failed");
+    exit(EXIT_FAILURE);
+  }
+  listen(server_fd, 1);
+  addr_len = sizeof(client);
+  new_socket = accept(server_fd, (struct sockaddr *)&client, (socklen_t *)&addr_len);
   printf("\nTCP Connection Established.\n");
   s1 = (unsigned int)time(NULL);
   srand(s1);
   strcpy(b, "Time Out ");
-  recv(sock, a, sizeof(a), 0);
+  recv(new_socket, a, sizeof(a), 0);
   f = atoi(a);
   while (1) {
     for (i = 0; i < W; i++) {
-      recv(sock, a, sizeof(a), 0);
+      recv(new_socket, a, sizeof(a), 0);
       if (strcmp(a, b) == 0) {
         break;
       }
@@ -45,13 +49,13 @@ int main() {
     while (i < W) {
       j = rand() % P1;
       if (j < P2) {
-        send(sock, b, sizeof(b), 0);
+        send(new_socket, b, sizeof(b), 0);
         break;
       } else {
         alpha9(c);
         if (c <= f) {
           printf("\nFrame %s Received ", a);
-          send(sock, a, sizeof(a), 0);
+          send(new_socket, a, sizeof(a), 0);
         } else {
           break;
         }
@@ -63,8 +67,8 @@ int main() {
       i++;
     }
   }
-  close(sock);
-  close(s);
+  close(new_socket);
+  close(server_fd);
   return 0;
 }
 
