@@ -4,3 +4,6 @@
 
 <img src="SLINGER-programming at night.png" width="300"/>
 
+***
+<h1 align="center">Made with ❤️ by ANURAG PATHAK</h1>
+
