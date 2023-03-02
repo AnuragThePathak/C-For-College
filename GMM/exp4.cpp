@@ -44,7 +44,7 @@ void myInit()
 	glFlush();
 }
 
-void drawTriangle()
+void drawPentagon()
 {
 	glBegin(GL_TRIANGLES);
 	glVertex3f(V1X, V1Y, V1Z);
@@ -58,21 +58,21 @@ void transformRotate(float deg, float xaxis, float yaxis, float zaxis)
 {
 	glColor3f(0.0f, 0.0f, 1.0f);
 	glRotatef(deg, xaxis, yaxis, zaxis);
-	drawTriangle();
+	drawPentagon();
 }
 
 void transformTranslate(float xaxis, float yaxis, float zaxis)
 {
 	glColor3f(0.0f, 1.0f, 0.0f);
 	glTranslatef(xaxis, yaxis, zaxis);
-	drawTriangle();
+	drawPentagon();
 }
 
 void transformScale(float xaxis, float yaxis, float zaxis)
 {
 	glColor3f(1.0f, 0.0f, 0.0f);
 	glScalef(xaxis, yaxis, zaxis);
-	drawTriangle();
+	drawPentagon();
 }
 
 void transformShear(float xaxis, float yaxis, float zaxis)
@@ -90,7 +90,7 @@ void transformShear(float xaxis, float yaxis, float zaxis)
 		V2Y += V2X * yaxis;
 		V3Y += V3X * yaxis;
 	}
-	drawTriangle();
+	drawPentagon();
 }
 
 void transformReflect(float xaxis, float yaxis, float zaxis)
@@ -108,13 +108,13 @@ void transformReflect(float xaxis, float yaxis, float zaxis)
 		V2X = -V2X;
 		V3X = -V3X;
 	}
-	drawTriangle();
+	drawPentagon();
 }
 
 void myDisplay()
 {
 	glColor3f(1.0, 1.0, 1.0);
-	drawTriangle();
+	drawPentagon();
 	int opt;
 	printf("Choose the operation to perform\n"
 		   "1. TRANSLATION\n"
