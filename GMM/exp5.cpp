@@ -11,126 +11,173 @@ perform the following
 
 */
 
-#include <stdio.h>
 #include <GL/glut.h>
+#include <stdio.h>
 
-GLfloat V1X = 0.0f, V1Y = 300.0f, V1Z = 0.0f;
-GLfloat V2X = 300.0f, V2Y = 300.0f, V2Z = 0.0f;
-GLfloat V3X = 300.0f, V3Y = 0.0f, V3Z = 0.0f;
-GLfloat V4X = 0.0f, V4Y = 0.0f, V4Z = 0.0f;
-
-void myInit()
-{
-	glClear(GL_COLOR_BUFFER_BIT);
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-	glColor3f(0.0f, 0.5f, 0.5f);
+void initGL() {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(-500, 500, -500, 500);
+	gluOrtho2D(-10,10,-10,10);
+}
 
+
+void original(){
 	glBegin(GL_LINE_LOOP);
-	glVertex3f(-400.0, 0.0, 0.0);
-	glVertex3f(400.0, 0.0, 0.0);
-	glEnd();
+      glColor3f(0.0f, 0.0f, 1.0f);
+      glVertex2f(0.0f,3.0f);
+      glVertex2f(3.0f,3.0f);
+      glVertex2f(3.0f,0.0f);
+      glVertex2f(0.0f,0.0f);
+   glEnd();
+}
 
+void translate(){
+	glTranslatef(1.0f,5.0f,0.0f);
 	glBegin(GL_LINE_LOOP);
-	glVertex3f(0.0, -400.0, 0.0);
-	glVertex3f(0.0, 400.0, 0.0);
-	glEnd();
-
-	glFlush();
+      glColor3f(1.0f, 0.0f, 0.0f);
+      glVertex2f(0.0f,3.0f);
+      glVertex2f(3.0f,3.0f);
+      glVertex2f(3.0f,0.0f);
+      glVertex2f(0.0f,0.0f);
+   glEnd();
 }
 
-void drawSquare()
-{
+void scale(){
+	glScalef(2.0f,3.0f,0.0f);
 	glBegin(GL_LINE_LOOP);
-	glVertex3f(V1X, V1Y, V1Z);
-	glVertex3f(V2X, V2Y, V2Z);
-	glVertex3f(V3X, V3Y, V3Z);
-	glVertex3f(V4X, V4Y, V4Z);
-	glEnd();
-	glFlush();
+      glColor3f(1.0f, 0.0f, 0.0f);
+      glVertex2f(0.0f,3.0f);
+      glVertex2f(3.0f,3.0f);
+      glVertex2f(3.0f,0.0f);
+      glVertex2f(0.0f,0.0f);
+   glEnd();
 }
 
-void transformRotate(float deg, float xaxis, float yaxis, float zaxis)
-{
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glRotatef(deg, xaxis, yaxis, zaxis);
-	drawSquare();
+void rotate(){
+	glRotatef(90, 0.0f,0.0f,1.0f);
+	glBegin(GL_LINE_LOOP);
+      glColor3f(1.0f, 0.0f, 0.0f);
+      glVertex2f(0.0f,3.0f);
+      glVertex2f(3.0f,3.0f);
+      glVertex2f(3.0f,0.0f);
+      glVertex2f(0.0f,0.0f);
+   glEnd();
 }
 
-void transformTranslate(float xaxis, float yaxis, float zaxis)
-{
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glTranslatef(xaxis, yaxis, zaxis);
-	drawSquare();
+void reflection(){
+	GLfloat m[16] = {
+    1.0f, 0.0f, 0.0f, 0.0f,
+    0.0f, -1.0f, 0.0f, 0.0f,
+    0.0f, 0.0f, 1.0f, 0.0f,
+    0.0f, 0.0f, 0.0f, 1.0f
+	};
+	glMultMatrixf(m);
+	glBegin(GL_LINE_LOOP);
+      glColor3f(1.0f, 0.0f, 0.0f);
+      glVertex2f(0.0f,3.0f);
+      glVertex2f(3.0f,3.0f);
+      glVertex2f(3.0f,0.0f);
+      glVertex2f(0.0f,0.0f);
+   glEnd();
 }
 
-void transformScale(float xaxis, float yaxis, float zaxis)
-{
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glScalef(xaxis, yaxis, zaxis);
-	drawSquare();
+void display() {
+   glClear(GL_COLOR_BUFFER_BIT);
+   glBegin(GL_LINE_LOOP);
+      glColor3f(0.0f, 1.0f, 0.0f);
+      glVertex2f(0.0f,10.0f);
+      glVertex2f(0.0f,-10.0f);
+   glEnd();
+   glBegin(GL_LINE_LOOP);
+      glColor3f(0.0f, 1.0f, 0.0f);
+      glVertex2f(10.0f,0.0f);
+      glVertex2f(-10.0f,0.0f);
+   glEnd();
+   original();
+   translate();
+   glFlush();  
 }
 
-void transformReflect(float xaxis, float yaxis, float zaxis)
-{
-	glColor3f(0.0f, 0.5f, 0.2f);
-	if (xaxis == 1.0)
-	{
-		V1Y = -V1Y;
-		V2Y = -V2Y;
-		V3Y = -V3Y;
+void display2() {
+	glBegin(GL_LINE_LOOP);
+      glColor3f(0.0f, 1.0f, 0.0f);
+      glVertex2f(0.0f,10.0f);
+      glVertex2f(0.0f,-10.0f);
+   glEnd();
+   glBegin(GL_LINE_LOOP);
+      glColor3f(0.0f, 1.0f, 0.0f);
+      glVertex2f(10.0f,0.0f);
+      glVertex2f(-10.0f,0.0f);
+   glEnd();
+   glClear(GL_COLOR_BUFFER_BIT);
+   original();
+   scale();
+   glFlush();  
+}
+
+void display3() {
+	glBegin(GL_LINE_LOOP);
+      glColor3f(0.0f, 1.0f, 0.0f);
+      glVertex2f(0.0f,10.0f);
+      glVertex2f(0.0f,-10.0f);
+   glEnd();
+   glBegin(GL_LINE_LOOP);
+      glColor3f(0.0f, 1.0f, 0.0f);
+      glVertex2f(10.0f,0.0f);
+      glVertex2f(-10.0f,0.0f);
+   glEnd();
+   glClear(GL_COLOR_BUFFER_BIT);
+   original();
+   rotate();
+   glFlush();  
+}
+
+void display4() {
+	glBegin(GL_LINE_LOOP);
+      glColor3f(0.0f, 1.0f, 0.0f);
+      glVertex2f(0.0f,10.0f);
+      glVertex2f(0.0f,-10.0f);
+   glEnd();
+   glBegin(GL_LINE_LOOP);
+      glColor3f(0.0f, 1.0f, 0.0f);
+      glVertex2f(10.0f,0.0f);
+      glVertex2f(-10.0f,0.0f);
+   glEnd();
+   glClear(GL_COLOR_BUFFER_BIT);
+   original();
+   reflection();
+   glFlush();  
+}
+
+int main(int argc, char** argv) {
+	int choice;
+   printf("Enter the choice for transformation\n");
+   printf("1. Translation\n");
+   printf("2. Scaling\n");
+   printf("3. Rotation\n");
+   printf("4. Reflection\n");
+   scanf("%d",&choice);
+   glutInit(&argc, argv);
+   glutCreateWindow("Square Transformation");
+   glutInitWindowSize(1600, 900);
+   glutInitWindowPosition(0, 0);
+   if (choice ==1){
+   		glutDisplayFunc(display);
+   }
+    else if (choice ==2){
+    	glutDisplayFunc(display2);
 	}
-	if (yaxis == 1.0)
-	{
-		V1X = -V1X;
-		V2X = -V2X;
-		V3X = -V3X;
+	else if(choice ==3){
+		glutDisplayFunc(display3);
 	}
-	drawSquare();
-}
-
-void myDisplay()
-{
-	glColor3f(1.0, 1.0, 1.0);
-	drawSquare();
-	int opt;
-	printf("Choose the operation to perform\n"
-		   "1. Scaling\n"
-		   "2. Translation\n"
-		   "3. Reflection\n"
-		   "4. Rotation\n"
-		   "\n");
-
-	scanf("%d", &opt);
-
-	switch (opt)
-	{
-	case 1:
-		transformScale(1.5, 1.5, 0.0);
-		break;
-	case 2:
-		transformTranslate(200.0, 200.0, 0.0);
-		break;
-	case 3:
-		transformReflect(0.0, 1.0, 0.0);
-		break;
-	case 4:
-		transformRotate(-45.0, 0.0, 0.0, 1.0);
-		break;
+	else if(choice ==4){
+		glutDisplayFunc(display4);
 	}
-}
-
-int main(int argc, char **argv)
-{
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowPosition(500, 0);
-	glutInitWindowSize(1000, 1000);
-	glutCreateWindow("2D TRANSFORMATION of Square");
-	glutDisplayFunc(myDisplay);
-	myInit();
-	glutMainLoop();
-	return 0;
+	else{
+		printf("Invalid Input");
+		return 0;
+	}
+   	initGL();
+   	glutMainLoop();
+   return 0;
 }
