@@ -154,7 +154,7 @@ int main(int argc, char** argv)
 	pts[6][0]=0,pts[6][1]=80;
 	pts[7][0]=-140,  pts[7][1]=80;
 	pts[8][0]=-20,pts[8][1]=60;
-	pts[8][0]=-80,  pts[8][1]=30;
+	pts[9][0]=-80,  pts[9][1]=30;
     glutInit(&argc,argv);
     glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
     glutInitWindowSize(600,600);
