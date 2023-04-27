@@ -7,6 +7,7 @@ byacc -d sam.y
 cc lex.yy.c y.tab.c -ll
 ./a.out
 
+1. Write a lex program to recognize an alphabet.
 2. Write a lex program to identify keywords, symbols and operators.
 3. Write a lex program, which takes a C program as input, and display the list of
 identifiers and operators.
@@ -20,5 +21,3 @@ comments, and then delete the comments.
 9. Write a yacc program to recognize nested “IF” control statements, and display the number of level of nesting.
 10. Write a yacc program to recognize a valid variable, which starts with a letter followed by any number of digit and letter.
 11. Write a yacc program to recognize strings “aaab”, “abbb”, “ab” and “a” using the grammar an bn, where n>0.
-12. Write a program for constructing of LL(1) parsing.
-13. WAP for constructing recursive descent parsing.
